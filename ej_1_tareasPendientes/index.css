@@ -1,0 +1,82 @@
+body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .titulo {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        .container-div {
+            background-color: rgb(119, 99, 99);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        #form-tarea {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        #form-tarea input {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        #form-tarea button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        #form-tarea button:hover {
+            background-color: #45a049;
+        }
+        
+        .tareas-pendientes, .tareas-realizadas {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .tarea-item {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .tarea-item:last-child {
+            border-bottom: none;
+        }
+
+        .tarea-item.completada {
+  background-color: #f0f0f0;
+  text-decoration: line-through;
+  color: #666;
+  opacity: 0.8;
+}
+
+#tareas-realizadas {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 2px solid #eee;
+}
+
+#tareas-realizadas h2 {
+  color: #4CAF50;
+}
