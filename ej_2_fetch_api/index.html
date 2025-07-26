@@ -3,15 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>fech</title>
-    <link rel="stylesheet" href="index.css">
+    <title>Fetch</title>
+    <link rel="stylesheet"   href="index.css">
 </head>
 <body>
-    <div id="fetch-container" class="fetch-container">
-        <h1>Aqui se renderizara la data de body</h1>
-        <div id="card-cotainer" class="card-cotainer"></div>
+       <div class="fetch-container">
+        <h1>Personajes de Rick and Morty</h1>
+        
+        <div class="controls">
+            <input 
+                type="text" 
+                id="search-input" 
+                class="search-box" 
+                placeholder="Buscar por nombre..."
+            >
+            <div class="pagination">
+                <button id="prev-btn">Anterior</button>
+                <button id="next-btn">Siguiente</button>
+            </div>
+        </div>
+        
+        <div id="card-container" class="card-container"></div>
     </div>
-    
 </body>
 <script src="index.js"></script>
 </html>
