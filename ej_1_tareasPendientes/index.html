@@ -6,11 +6,13 @@
     <link rel="stylesheet"   href="index.css">
     <title>Examen</title>
 </head>
-<body>
+<body>  
         <div class="titulo">
             <h1>Manipulacion de DOM con js</h1>
         </div>
+        <div class="app-container">
         <div id="container-div" class="container-div">
+            <div id="error-message" class="hidden">Por favor complete todos los campos</div>
             <form id="form-tarea" class="form-tarea">
                 <label for="input-tarea">Tarea</label>
                 <input type="text" id="input-tarea"><br>
@@ -19,9 +21,10 @@
                 <button type="submit">Agregar tarea</button>
             </form>
         </div>
+        </div>
        
         <div id="tareas-pendientes" class="tareas-pendientes"></div>
-        <div id="tareas-realizadas" class="tereas-realizadas"></div>
+        <div id="tareas-realizadas" class="tareas-realizadas"></div>
   
     
 </body>

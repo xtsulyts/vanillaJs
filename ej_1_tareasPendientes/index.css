@@ -1,82 +1,208 @@
-body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0;
+
+
+
+        body {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            min-height: 100vh;
             padding: 20px;
-            background-color: #f5f5f5;
-        }
-        .titulo {
-            text-align: center;
             color: #333;
-            margin-bottom: 20px;
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: auto auto 1fr;
+            grid-template-areas:
+                "titulo"
+                "formulario"
+                "tareas";
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
-        
-        .container-div {
-            background-color: rgb(119, 99, 99);
+
+        .titulo {
+            grid-area: titulo;
+            text-align: center;
             padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+            margin-bottom: 10px;
+        }
+
+        .titulo h1 {
+            font-size: 2.2rem;
+            color: #2c3e50;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .app-container {
+            grid-area: formulario;
+            display: grid;
+            grid-template-columns: 1fr;
+        }
+
+        .container-div {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .container-div:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #error-message {
+            background: linear-gradient(to right, #ff6b6b, #ff8e8e);
+            color: white;
+            padding: 12px;
             border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 600;
+            grid-column: 1 / -1;
+            animation: pulse 2s infinite;
         }
-        
-        #form-tarea {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
         }
-        
-        #form-tarea input {
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
+
+        .form-tarea {
+            display: grid;
+            grid-template-columns: 100px 1fr;
+            gap: 15px;
+            align-items: center;
         }
-        
-        #form-tarea button {
-            padding: 10px;
-            background-color: #4CAF50;
+
+        .form-tarea label {
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 1.1rem;
+        }
+
+        .form-tarea input {
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-tarea input:focus {
+            border-color: #3498db;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.3);
+        }
+
+        .form-tarea button {
+            grid-column: 1 / -1;
+            background: linear-gradient(to right, #3498db, #2980b9);
             color: white;
             border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        
-        #form-tarea button:hover {
-            background-color: #45a049;
-        }
-        
-        .tareas-pendientes, .tareas-realizadas {
-            background-color: white;
-            padding: 20px;
+            padding: 14px;
             border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
         }
-        
-        .tarea-item {
-            padding: 10px;
-            border-bottom: 1px solid #eee;
+
+        .form-tarea button:hover {
+            background: linear-gradient(to right, #2980b9, #3498db);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-tarea button:active {
+            transform: translateY(1px);
+        }
+
+        /* Contenedor de tareas */
+        .tareas-grid {
+            grid-area: tareas;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+        }
+
+        .tareas-pendientes, .tareas-realizadas {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tareas-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #3498db;
         }
-        
-        .tarea-item:last-child {
-            border-bottom: none;
+
+        .tareas-header h2 {
+            color: #2c3e50;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .tarea-item.completada {
-  background-color: #f0f0f0;
-  text-decoration: line-through;
-  color: #666;
-  opacity: 0.8;
-}
+        .counter {
+            background-color: #3498db;
+            color: white;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
 
-#tareas-realizadas {
-  margin-top: 30px;
-  padding-top: 20px;
-  border-top: 2px solid #eee;
-}
+        /* Estilos responsivos */
+        @media (min-width: 768px) {
+            body {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto auto 1fr;
+                grid-template-areas:
+                    "titulo"
+                    "formulario"
+                    "tareas";
+            }
+            
+            .tareas-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
 
-#tareas-realizadas h2 {
-  color: #4CAF50;
-}
+        @media (min-width: 992px) {
+            body {
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: auto 1fr;
+                grid-template-areas:
+                    "titulo titulo"
+                    "formulario tareas";
+                gap: 30px;
+            }
+            
+            .tareas-grid {
+                grid-template-columns: 1fr;
+                height: 100%;
+            }
+        }
+   

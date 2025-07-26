@@ -1,0 +1,175 @@
+
+## Aplicación de Gestión de Tareas
+### Estructura del código:
+1. **Inicialización**: Se ejecuta cuando el documento HTML ha sido completamente cargado.
+2. **Selectores del DOM**: Referencias a elementos HTML.
+3. **Variables Globales**: Datos que se comparten en toda la aplicación.
+4. **Manejo de Eventos**: Escuchadores de eventos para el formulario y los botones.
+5. **Funciones Principales**: Lógica central de la aplicación.
+6. **Funciones Auxiliares**: Operaciones específicas para manipular tareas.
+---
+### 1. Inicialización (DOMContentLoaded)
+```javascript
+document.addEventListener("DOMContentLoaded", function () {
+  mostrarTareas();
+});
+```
+- **Explicación**: Cuando el navegador termina de cargar el documento HTML, se ejecuta la función `mostrarTareas()`. Esto asegura que la página muestre las tareas almacenadas al inicio.
+---
+### 2. Selectores del DOM
+```javascript
+const formTarea = document.getElementById("form-tarea");
+const inputTarea = document.getElementById("input-tarea");
+const inputFecha = document.getElementById("input-fecha");
+const tareasPendientes = document.getElementById("tareas-pendientes");
+const tareasRealizadas = document.getElementById("tareas-realizadas");
+```
+- **Explicación**: Obtenemos referencias a elementos del DOM (HTML) por su ID. Estos elementos son:
+  - `formTarea`: El formulario para agregar/editar tareas.
+  - `inputTarea`: Campo de texto para la descripción de la tarea.
+  - `inputFecha`: Campo de fecha para la tarea.
+  - `tareasPendientes`: Contenedor donde se mostrarán las tareas pendientes.
+  - `tareasRealizadas`: Contenedor donde se mostrarán las tareas completadas.
+---
+### 3. Variables Globales
+```javascript
+let tareas = JSON.parse(localStorage.getItem("tareas")) || [];
+let editando = false;
+let idEdicion = null;
+```
+- **Explicación**:
+  - `tareas`: Array que almacena todas las tareas. Se carga desde `localStorage` (si hay datos guardados) o se inicia como un array vacío.
+  - `editando`: Bandera (booleana) que indica si estamos en modo edición (true) o agregando una nueva tarea (false).
+  - `idEdicion`: Almacena el ID de la tarea que se está editando (si aplica).
+---
+### 4. Manejo de Eventos
+#### a) Evento de envío del formulario
+```javascript
+formTarea.addEventListener("submit", function (e) {
+  e.preventDefault(); // Evita que el formulario recargue la página
+  // ... (validación, lógica de agregar/editar, limpieza)
+});
+```
+- **Explicación**: Cuando se envía el formulario:
+  1. Previene el comportamiento por defecto (recargar la página).
+  2. Obtiene y valida los valores de los campos.
+  3. Si estamos editando, actualiza la tarea; si no, agrega una nueva.
+  4. Limpia el formulario y actualiza la vista.
+#### b) Event Delegation para botones en tareas pendientes y realizadas
+```javascript
+tareasPendientes.addEventListener("click", (e) => {
+  // Maneja clics en botones de eliminar, editar y completar
+});
+tareasRealizadas.addEventListener("click", (e) => {
+  // Maneja clics en botones de eliminar
+});
+```
+- **Explicación**: En lugar de agregar un evento a cada botón, se agrega un solo evento al contenedor. Se verifica qué botón se hizo clic usando las clases y el `dataset.id`. Esto es eficiente, especialmente para elementos dinámicos.
+---
+### 5. Funciones Principales
+#### a) `agregarTarea(tarea)`
+```javascript
+function agregarTarea(tarea) {
+  try {
+    tareas.push(tarea);
+    localStorage.setItem("tareas", JSON.stringify(tareas));
+  } catch(error) {
+    console.log("Error al cargar los datos")
+  }
+}
+```
+- **Explicación**: Agrega una nueva tarea al array `tareas` y guarda en `localStorage`. Maneja errores con un bloque `try-catch`.
+#### b) `actualizarTarea(tareaActualizada, id)`
+```javascript
+function actualizarTarea(tareaActualizada, id) {
+  tareas = tareas.map(tarea =>
+    tarea.id === id ? { ...tarea, ...tareaActualizada } : tarea
+  );
+  localStorage.setItem("tareas", JSON.stringify(tareas));
+}
+```
+- **Explicación**: Busca la tarea con el `id` dado y la actualiza con las nuevas propiedades. Usa el operador spread (`...`) para combinar objetos. Luego guarda en `localStorage`.
+#### c) `mostrarTareas()`
+```javascript
+function mostrarTareas() {
+  // Limpia contenedores
+  // Crea títulos
+  // Filtra tareas pendientes y completadas
+  // Genera y muestra los elementos de tareas
+}
+```
+- **Explicación**:
+  1. Limpia los contenedores de tareas pendientes y realizadas.
+  2. Crea y añade títulos a los contenedores.
+  3. Filtra las tareas en pendientes y completadas.
+  4. Para cada tarea, crea un elemento DOM usando `crearElementoTarea` y lo añade al contenedor correspondiente.
+#### d) `crearElementoTarea(tarea, completada)`
+```javascript
+function crearElementoTarea(tarea, completada) {
+  // Crea un contenedor div para la tarea
+  // Agrega un span con el texto y fecha
+  // Si no está completada, muestra botones: Editar, Eliminar, Completar
+  // Si está completada, solo muestra el botón Eliminar
+}
+```
+- **Explicación**: Construye el elemento HTML para una tarea. Dependiendo de si está completada o no, muestra diferentes botones. Cada botón tiene un atributo `data-id` con el ID de la tarea para identificarla en los eventos.
+---
+### 6. Funciones Auxiliares
+#### a) `eliminarTarea(id)`
+```javascript
+function eliminarTarea(id) {
+  tareas = tareas.filter(tarea => tarea.id !== id);
+  localStorage.setItem("tareas", JSON.stringify(tareas));
+  mostrarTareas();
+}
+```
+- **Explicación**: Filtra el array `tareas` para quitar la tarea con el `id` dado. Actualiza `localStorage` y la vista.
+#### b) `editarTarea(id)`
+```javascript
+function editarTarea(id) {
+  // Busca la tarea por ID
+  // Si existe, activa el modo edición
+  // Rellena el formulario con los datos de la tarea
+  // Cambia el texto del botón del formulario a "Guardar Cambios"
+}
+```
+- **Explicación**: Prepara el formulario para editar una tarea existente. Establece las variables globales `editando` e `idEdicion`, y llena los campos del formulario.
+#### c) `completarTarea(id)`
+```javascript
+function completarTarea(id) {
+  tareas = tareas.map(tarea =>
+    tarea.id === id ? { ...tarea, completada: true } : tarea
+  );
+  localStorage.setItem("tareas", JSON.stringify(tareas));
+  mostrarTareas();
+}
+```
+- **Explicación**: Busca la tarea por ID y cambia su propiedad `completada` a `true`. Actualiza `localStorage` y la vista.
+---
+### Flujo General de la Aplicación
+1. **Al cargar la página**: Se cargan las tareas desde `localStorage` y se muestran.
+2. **Agregar tarea**:
+   - El usuario llena el formulario y envía.
+   - Se valida, se crea un objeto tarea (con `id` único usando `Date.now()`).
+   - Se añade a `tareas` y se guarda en `localStorage`.
+   - Se actualiza la vista.
+3. **Editar tarea**:
+   - El usuario hace clic en "Editar" en una tarea pendiente.
+   - El formulario se llena con los datos de la tarea y cambia a modo edición.
+   - Al enviar, se actualiza la tarea en el array y se guarda.
+   - El formulario vuelve a modo agregar.
+4. **Completar tarea**:
+   - El usuario hace clic en "Completar" en una tarea pendiente.
+   - La tarea se marca como completada y se mueve a la sección de realizadas.
+5. **Eliminar tarea**:
+   - El usuario hace clic en "Eliminar" (en cualquier sección).
+   - La tarea se elimina del array y de la vista.
+---
+### Conceptos Importantes
+- **localStorage**: Almacenamiento en el navegador (persistente). Solo guarda strings, por eso usamos `JSON.stringify` para guardar y `JSON.parse` para leer.
+- **Event Delegation**: Técnica para manejar eventos en elementos dinámicos. Se asigna un evento a un contenedor padre y se verifica el elemento objetivo (`e.target`).
+- **Manipulación del DOM**: Crear, modificar y eliminar elementos HTML desde JavaScript.
+- **Métodos de Array**: `filter`, `map`, `find` (muy usados para manipular las tareas).
+- **Operador Spread (`...`)**: Para copiar y combinar objetos sin modificar el original (inmutabilidad).
+- **Try-Catch**: Mecanismo para manejar errores.
+---
