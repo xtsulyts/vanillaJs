@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FetchLocalStorageApi</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="contenedor">
+        <!-- Sección de inicio de sesión -->
+        <section id="seccion-login" class="seccion-activa">
+            <div class="contenido-formulario">
+                <h1>Iniciar Sesión</h1>
+                <form id="formulario-login">
+                    <div class="grupo-formulario">
+                        <label for="username">Usuario</label>
+                        <input type="text" id="username" required>
+                    </div>
+                    <div class="grupo-formulario">
+                        <label for="password">Contraseña</label>
+                        <input type="password" id="password" required>
+                    </div>
+                    <button type="submit" class="boton boton-primario">Ingresar</button>
+                </form>
+                <div id="mensaje-error" class="mensaje-error oculto"></div>
+                
+                <!-- Credenciales de prueba -->
+                <div class="credenciales-prueba">
+                    <h3>Credenciales de Prueba:</h3>
+                    <p><strong>Usuario:</strong>  emilys</p>
+                    <p><strong>Contraseña:</strong>  emilyspass</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de contenido protegido -->
+        <section id="seccion-protegida" class="oculto">
+            <div class="cabecera">
+                <div class="perfil-usuario">
+                    <img id="avatar-usuario" src="" alt="Avatar del usuario">
+                    <div>
+                        <h1>Bienvenido, <span id="nombre-usuario"></span>!</h1>
+                        <p>ID: <span id="id-usuario"></span></p>
+                    </div>
+                </div>
+                <button id="boton-cerrar-sesion" class="boton boton-secundario">Cerrar Sesión</button>
+            </div>
+
+            <div class="contenido-protegido">
+                <h2>Contenido Protegido</h2>
+                
+                <!-- Panel de controles -->
+                <div class="panel-controles">
+                    <div class="filtro-id">
+                        <label for="filtro-id">Buscar por ID:</label>
+                        <input type="number" id="filtro-id" min="1" placeholder="Ingrese ID de usuario">
+                        <button id="boton-buscar-id" class="boton boton-primario">Buscar</button>
+                    </div>
+                    <div class="botones-usuarios">
+                        <button id="boton-cargar-todos" class="boton boton-accion">Cargar Todos los Usuarios</button>
+                        <button id="boton-ocultar-usuarios" class="boton boton-peligro oculto">Ocultar Usuarios</button>
+                    </div>
+                </div>
+                
+                <!-- Información del usuario -->
+                <div class="grid-contenedor">
+                    <div class="tarjeta">
+                        <h3>Perfil de Usuario</h3>
+                        <div id="info-usuario"></div>
+                    </div>
+                    <div class="tarjeta">
+                        <h3>Datos de Autenticación</h3>
+                        <div id="info-token"></div>
+                    </div>
+                </div>
+                
+                <!-- Contenedor para todos los usuarios -->
+                <div id="contenedor-todos-usuarios" class="oculto">
+                    <div class="header-usuarios">
+                        <h3>Todos los Usuarios</h3>
+                        <p>Total: <span id="total-usuarios">0</span> usuarios encontrados</p>
+                    </div>
+                    <div class="grid-usuarios" id="lista-usuarios"></div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>
