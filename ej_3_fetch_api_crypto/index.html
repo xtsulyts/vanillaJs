@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cotizador de Criptomonedas</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-coins"></i> Cotizador Cripto</h1>
+            <p class="subtitle">Precios en tiempo real - Actualizado automáticamente</p>
+        </header>
+        
+        <div class="controls">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Buscar criptomoneda...">
+            </div>
+            <div class="filter-controls">
+                <button class="filter-btn" id="filterTop">Top 20</button>
+                <button class="filter-btn" id="filterGainers">Ganadoras</button>
+                <button class="filter-btn" id="filterLosers">Perdedoras</button>
+            </div>
+            <button class="refresh-btn" id="refreshBtn">
+                <i class="fas fa-sync-alt"></i> Actualizar
+            </button>
+        </div>
+        
+        <div class="stats-bar">
+            <div class="stat-item">
+                <span>BTC</span>
+                <span id="btcPrice">$--.--</span>
+            </div>
+            <div class="stat-item">
+                <span>ETH</span>
+                <span id="ethPrice">$--.--</span>
+            </div>
+            <div class="stat-item">
+                <span>Mercado</span>
+                <span id="marketCap">$--.--</span>
+            </div>
+            <div class="stat-item">
+                <span>Volumen 24h</span>
+                <span id="volume24h">$--.--</span>
+            </div>
+        </div>
+        
+        <div class="crypto-grid" id="cryptoGrid">
+            <div class="loading">
+                <div class="spinner"></div>
+                <p>Cargando datos de criptomonedas...</p>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Datos proporcionados por CoinGecko API | Actualizado: <span id="updateTime"></span></p>
+            <div class="api-info">
+                <span><i class="fas fa-database"></i> API: CoinGecko</span>
+                <span><i class="fas fa-code"></i> JavaScript + Fetch API</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>
