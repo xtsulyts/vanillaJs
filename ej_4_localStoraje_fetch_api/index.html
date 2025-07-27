@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FetchLocalStorage</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Fetch API LocalStorage</h1>
+            <p class="subtitle">CRUD con localStorage, fetch y manipulación del DOM</p>
+        </header>
+        
+        <div class="controls">
+            <button id="load-btn" class="btn btn-primary">
+                <span id="load-text">Cargar Productos</span>
+                <span id="load-spinner" class="loader hidden"></span>
+            </button>
+            <button id="create-btn" class="btn btn-success">Crear Nuevo Producto</button>
+            <button id="clear-btn" class="btn btn-danger">Limpiar Datos</button>
+        </div>
+        
+        <div class="content">
+            <div>
+                <h2>Lista de Productos</h2>
+                <div id="products-container" class="products-grid"></div>
+            </div>
+            
+            <div>
+                <div id="detail-container" class="detail-section">
+                    <div class="detail-header">
+                        <h2 class="detail-title">Detalles del Producto</h2>
+                    </div>
+                    <div id="detail-content">
+                        <div class="empty-state">
+                            <p>Selecciona un producto para ver los detalles</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="form-container" class="form-section hidden">
+                    <h2 class="form-title" id="form-title">Crear Nuevo Producto</h2>
+                    <form id="product-form">
+                        <input type="hidden" id="product-id">
+                        <div class="form-group">
+                            <label for="title">Título</label>
+                            <input type="text" id="title" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Descripción</label>
+                            <textarea id="description" rows="3" required></textarea>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="price">Precio ($)</label>
+                                <input type="number" id="price" step="0.01" min="0" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="rating">Calificación (0-5)</label>
+                                <input type="number" id="rating" min="0" max="5" step="0.1" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="brand">Marca</label>
+                                <input type="text" id="brand" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="category">Categoría</label>
+                                <select id="category" required>
+                                    <option value="">Seleccione una categoría</option>
+                                    <option value="smartphones">Smartphones</option>
+                                    <option value="laptops">Laptops</option>
+                                    <option value="fragrances">Fragancias</option>
+                                    <option value="skincare">Cuidado de la piel</option>
+                                    <option value="groceries">Comestibles</option>
+                                    <option value="home-decoration">Decoración del hogar</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="thumbnail">URL de la imagen</label>
+                            <input type="url" id="thumbnail" required>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                            <button type="button" id="cancel-btn" class="btn btn-warning">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="notification" class="notification">
+        <span id="notification-text"></span>
+    </div>
+    
+    <script src="index.js"></script>
+</body>
+</html>
