@@ -28,6 +28,7 @@ let chartDataCache = {};        // Almacena datos históricos de gráficos para 
  * Esta función es asíncrona (async) porque hace una solicitud a internet
  */
 async function fetchCryptoData() {
+    console.log(fetchCryptoData)
     try {
         // Mostrar mensaje de carga mientras se obtienen los datos
         cryptoGrid.innerHTML = `

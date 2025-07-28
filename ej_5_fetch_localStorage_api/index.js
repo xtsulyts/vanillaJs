@@ -38,9 +38,9 @@ function verificarAutenticacion() {
     const token = localStorage.getItem('token');
     
     // Si existe un token, mostramos la sección protegida
-    if (token) {
+    if (usuario) {
         mostrarSeccionProtegida();
-        mostrarDatosUsuario(JSON.parse(usuario), token);
+        mostrarDatosUsuario(JSON.parse(usuario));
     }
 }
 
@@ -101,12 +101,12 @@ async function manejarLogin(evento) {
         // Verificamos si la autenticación fue exitosa
         if (datos.id) {
             // Guardamos los datos en el almacenamiento local
-            localStorage.setItem('token', datos.token);
+            localStorage.setItem('token', JSON.stringify(datos.accesToken));
             localStorage.setItem('usuario', JSON.stringify(datos));
             
             // Mostramos la sección protegida
             mostrarSeccionProtegida();
-            mostrarDatosUsuario(datos, datos.token);
+            mostrarDatosUsuario(datos);
             
             // Limpiamos el formulario y ocultamos mensajes de error
             formularioLogin.reset();
@@ -167,7 +167,7 @@ function mostrarDatosUsuario(usuario, token) {
     
     // Mostramos información del token de autenticación
     infoToken.innerHTML = `
-        <p><span class="dato-etiqueta">Token:</span> ${token.substring(0, 20)}...</p>
+        <p><span class="dato-etiqueta">Token:</span> ${token}...</p>
         <p><span class="dato-etiqueta">ID de Usuario:</span> ${usuario.id}</p>
         <p><span class="dato-etiqueta">Fecha de Nacimiento:</span> ${usuario.birthDate}</p>
         <p><span class="dato-etiqueta">Dirección:</span> ${usuario.address.address}, ${usuario.address.city}</p>

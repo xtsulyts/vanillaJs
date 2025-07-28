@@ -82,7 +82,6 @@ formTarea.addEventListener("submit", function (e) {
     document.querySelector('button[type="submit"]').textContent = "Agregar tarea";
   } else {
     // MODO AGREGAR: Crear nueva tarea
-    
     // Objeto con datos de la nueva tarea
     const nuevaTarea = {
       id: Date.now(), // ID único basado en la hora actual

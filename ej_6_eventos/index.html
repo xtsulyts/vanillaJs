@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EventosJavaScript</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="contenedor">
+        <header>
+            <h1>Repaso de Eventos en JavaScript</h1>
+            <p>Prueba diferentes tipos de eventos</p>
+        </header>
+        
+        <div class="contenido">
+            <!-- Panel de Eventos de Ratón -->
+            <div class="panel">
+                <h2>Eventos de Ratón</h2>
+                <div class="botones-eventos">
+                    <button id="boton-clic">Clic</button>
+                    <button id="boton-doble-clic">Doble Clic</button>
+                    <button id="boton-clic-derecho">Clic Derecho</button>
+                    <button id="boton-raton-sobre">Mouse Over</button>
+                    <button id="boton-raton-fuera">Mouse Out</button>
+                </div>
+                
+                <div class="area-flotante">
+                    <p>Pasa el ratón sobre este área para probar eventos de mouseover/mouseout</p>
+                </div>
+                
+                <div class="salida" id="salida-raton">
+                    Esperando eventos de ratón...
+                </div>
+            </div>
+            
+            <!-- Panel de Eventos de Teclado -->
+            <div class="panel">
+                <h2>Eventos de Teclado</h2>
+                <div class="grupo-formulario">
+                    <label for="entrada-teclado">Prueba eventos de teclado:</label>
+                    <input type="text" id="entrada-teclado" placeholder="Escribe aquí...">
+                </div>
+                
+                <div class="caja-teclado" id="caja-teclado">
+                    Presiona cualquier tecla
+                </div>
+                
+                <div class="salida" id="salida-teclado">
+                    Esperando eventos de teclado...
+                </div>
+            </div>
+            
+            <!-- Panel de Eventos de Formulario -->
+            <div class="panel">
+                <h2>Eventos de Formulario</h2>
+                <form id="formulario-prueba">
+                    <div class="grupo-formulario">
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" id="nombre" name="nombre" required>
+                    </div>
+                    
+                    <div class="grupo-formulario">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="grupo-formulario">
+                        <label for="pais">País:</label>
+                        <select id="pais" name="pais">
+                            <option value="">Selecciona un país</option>
+                            <option value="es">España</option>
+                            <option value="mx">México</option>
+                            <option value="ar">Argentina</option>
+                            <option value="co">Colombia</option>
+                        </select>
+                    </div>
+                    
+                    <div class="grupo-formulario">
+                        <label for="mensaje">Mensaje:</label>
+                        <textarea id="mensaje" name="mensaje" rows="3"></textarea>
+                    </div>
+                    
+                    <div class="grupo-formulario">
+                        <label>
+                            <input type="checkbox" id="suscripcion" name="suscripcion"> 
+                            Suscribirse al newsletter
+                        </label>
+                    </div>
+                    
+                    <div class="grupo-formulario">
+                        <button type="submit" id="boton-enviar">Enviar Formulario</button>
+                        <button type="reset" id="boton-limpiar">Limpiar</button>
+                    </div>
+                </form>
+                
+                <div class="salida" id="salida-formulario">
+                    Eventos de formulario aparecerán aquí...
+                </div>
+            </div>
+            
+            <!-- Panel de Otros Eventos -->
+            <div class="panel">
+                <h2>Otros Eventos</h2>
+                <div class="botones-eventos">
+                    <button id="boton-carga">Simular Carga</button>
+                    <button id="boton-redimensionar">Simular Redimensión</button>
+                    <button id="boton-desplazar">Desplázate en la página</button>
+                </div>
+                
+                <div class="salida" id="salida-otros">
+                    <p>Estado de carga: <span id="estado-carga">No cargado</span></p>
+                    <p>Tamaño de ventana: <span id="tamano-ventana">Calculando...</span></p>
+                    <p>Posición de desplazamiento: <span id="posicion-desplazamiento">0px</span></p>
+                </div>
+                
+                <div class="area-desplazable" id="area-desplazable">
+                    <p>Este es un área desplazable. Prueba el evento scroll.</p>
+                    <div class="contenido-desplazable"></div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Repaso de conceptos de JavaScript - Eventos DOM</p>
+        </footer>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>

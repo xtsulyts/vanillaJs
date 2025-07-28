@@ -1,0 +1,229 @@
+/* Variables de colores para usar en toda la página */
+:root {
+    --primario: #3498db;
+    --secundario: #2ecc71;
+    --peligro: #e74c3c;
+    --oscuro: #2c3e50;
+    --claro: #ecf0f1;
+}
+
+/* Reset básico para eliminar márgenes y rellenos predeterminados */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilos generales del cuerpo de la página */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: var(--claro);
+    padding: 20px;
+}
+
+/* Contenedor principal que centra el contenido */
+.contenedor {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+/* Estilos para el encabezado */
+header {
+    background: var(--oscuro);
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Diseño del contenido principal usando CSS Grid */
+.contenido {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Para pantallas pequeñas, cambiamos a una sola columna */
+@media (max-width: 768px) {
+    .contenido {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Estilos para cada panel de contenido */
+.panel {
+    background: #f9f9f9;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+/* Títulos de los paneles */
+.panel h2 {
+    color: var(--oscuro);
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--primario);
+}
+
+/* Contenedor de botones para eventos */
+.botones-eventos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+/* Estilos básicos para botones */
+button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    background: var(--primario);
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Efecto hover para botones */
+button:hover {
+    background: #2980b9;
+    transform: translateY(-2px);
+}
+
+/* Botón con estilo de peligro */
+#boton-peligro {
+    background: var(--peligro);
+}
+
+#boton-peligro:hover {
+    background: #c0392b;
+}
+
+/* Botón con estilo de éxito */
+#boton-exito {
+    background: var(--secundario);
+}
+
+#boton-exito:hover {
+    background: #27ae60;
+}
+
+/* Estilos para formularios */
+form {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+/* Grupos de elementos en formularios */
+.grupo-formulario {
+    margin-bottom: 15px;
+}
+
+/* Etiquetas de formulario */
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+/* Campos de formulario */
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: inherit;
+}
+
+/* Efecto de foco en campos de formulario */
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--primario);
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+/* Área de salida para mostrar información de eventos */
+.salida {
+    background: white;
+    padding: 15px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    min-height: 100px;
+    margin-top: 20px;
+    font-family: monospace;
+    white-space: pre-wrap;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+/* Registro individual de evento */
+.registro-evento {
+    background: var(--oscuro);
+    color: var(--claro);
+    padding: 10px;
+    border-radius: 4px;
+    margin-top: 10px;
+    font-size: 0.9em;
+}
+
+/* Caja para mostrar información de teclado */
+.caja-teclado {
+    background: var(--oscuro);
+    color: white;
+    text-align: center;
+    padding: 30px;
+    border-radius: 8px;
+    font-size: 1.2em;
+    margin-top: 20px;
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Pie de página */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: var(--oscuro);
+    color: white;
+    font-size: 0.9em;
+}
+
+/* Clase para resaltar elementos temporalmente */
+.resaltar {
+    background-color: yellow;
+    transition: background-color 0.5s ease;
+}
+
+/* Área para eventos de ratón */
+.area-flotante {
+    padding: 20px; 
+    background: #e3f2fd; 
+    border-radius: 8px; 
+    margin-bottom: 20px;
+}
+
+/* Área desplazable para eventos de scroll */
+.area-desplazable {
+    height: 200px; 
+    overflow-y: scroll; 
+    border: 1px solid #ddd; 
+    padding: 10px; 
+    margin-top: 20px;
+}
+
+/* Contenido dentro del área desplazable */
+.contenido-desplazable {
+    height: 800px; 
+    background: linear-gradient(to bottom, #3498db, #2c3e50);
+}
