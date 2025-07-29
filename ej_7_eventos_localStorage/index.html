@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor de Tareas con LocalStorage</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="contenedor">
+        <header>
+            <h1>Gestor de Tareas</h1>
+            <p>Crea, guarda, edita y elimina tareas usando localStorage</p>
+        </header>
+        
+        <main class="contenido-principal">
+            <!-- Sección para crear nuevas tareas -->
+            <section class="panel" id="panel-crear">
+                <h2>Crear Nueva Tarea</h2>
+                <form id="formulario-tarea">
+                    <div class="grupo-formulario">
+                        <label for="titulo-tarea">Título:</label>
+                        <input type="text" id="titulo-tarea" required>
+                    </div>
+                    
+                    <div class="grupo-formulario">
+                        <label for="descripcion-tarea">Descripción:</label>
+                        <textarea id="descripcion-tarea" rows="3"></textarea>
+                    </div>
+                    
+                    <div class="grupo-formulario">
+                        <label for="prioridad-tarea">Prioridad:</label>
+                        <select id="prioridad-tarea">
+                            <option value="baja">Baja</option>
+                            <option value="media">Media</option>
+                            <option value="alta">Alta</option>
+                        </select>
+                    </div>
+                    
+                    <div class="grupo-formulario">
+                        <button type="submit" id="boton-agregar">Agregar Tarea</button>
+                    </div>
+                </form>
+            </section>
+            
+            <!-- Sección para mostrar tareas existentes -->
+            <section class="panel" id="panel-tareas">
+                <h2>Tus Tareas</h2>
+                <div class="filtros">
+                    <label for="filtro-prioridad">Filtrar por prioridad:</label>
+                    <select id="filtro-prioridad">
+                        <option value="todas">Todas</option>
+                        <option value="alta">Alta</option>
+                        <option value="media">Media</option>
+                        <option value="baja">Baja</option>
+                    </select>
+                </div>
+                
+                <!-- Contenedor de tareas usando CSS Grid -->
+                <div class="contenedor-tareas" id="lista-tareas">
+                    <!-- Las tareas se insertarán aquí dinámicamente -->
+                </div>
+            </section>
+            
+            <!-- Sección para editar tareas (inicialmente oculta) -->
+            <section class="panel panel-edicion" id="panel-editar" style="display:none;">
+                <h2>Editar Tarea</h2>
+                <form id="formulario-editar">
+                    <input type="hidden" id="id-editar">
+                    
+                    <div class="grupo-formulario">
+                        <label for="titulo-editar">Título:</label>
+                        <input type="text" id="titulo-editar" required>
+                    </div>
+                    
+                    <div class="grupo-formulario">
+                        <label for="descripcion-editar">Descripción:</label>
+                        <textarea id="descripcion-editar" rows="3"></textarea>
+                    </div>
+                    
+                    <div class="grupo-formulario">
+                        <label for="prioridad-editar">Prioridad:</label>
+                        <select id="prioridad-editar">
+                            <option value="baja">Baja</option>
+                            <option value="media">Media</option>
+                            <option value="alta">Alta</option>
+                        </select>
+                    </div>
+                    
+                    <div class="grupo-formulario grupo-botones-edicion">
+                        <button type="submit" id="boton-guardar-cambios">Guardar Cambios</button>
+                        <button type="button" id="boton-cancelar-edicion">Cancelar</button>
+                    </div>
+                </form>
+            </section>
+        </main>
+        
+        <footer>
+            <p>CRUD Completo con LocalStorage y CSS Grid</p>
+            <div class="contador-tareas">
+                Tareas totales: <span id="contador-total">0</span> | 
+                <span class="prioridad-alta">Alta: <span id="contador-alta">0</span></span> | 
+                <span class="prioridad-media">Media: <span id="contador-media">0</span></span> | 
+                <span class="prioridad-baja">Baja: <span id="contador-baja">0</span></span>
+            </div>
+        </footer>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>

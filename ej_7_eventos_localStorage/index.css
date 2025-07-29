@@ -1,0 +1,311 @@
+/* Variables de colores */
+:root {
+    --primario: #3498db;
+    --secundario: #2ecc71;
+    --peligro: #e74c3c;
+    --advertencia: #f39c12;
+    --oscuro: #2c3e50;
+    --claro: #ecf0f1;
+    --borde: #bdc3c7;
+    --sombra: rgba(0, 0, 0, 0.1);
+}
+
+/* Reset básico */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: var(--claro);
+    padding: 20px;
+}
+
+.contenedor {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 20px var(--sombra);
+    overflow: hidden;
+}
+
+header {
+    background: var(--oscuro);
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+/* 
+   ----------------------------------------------------------
+   CSS GRID PARA EL CONTENIDO PRINCIPAL
+   ----------------------------------------------------------
+   Usamos CSS Grid para crear un diseño responsivo de dos columnas
+   en pantallas grandes y una columna en móviles.
+   
+   Explicación de propiedades:
+   - display: grid; -> activa el modo grid
+   - grid-template-columns: 1fr 1fr; -> dos columnas de igual tamaño
+   - gap: 20px; -> espacio entre elementos grid
+   - grid-template-areas: -> define áreas con nombres para posicionar elementos
+*/
+.contenido-principal {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 20px;
+    grid-template-areas:
+        "crear tareas"
+        "editar tareas";
+}
+
+/* En pantallas pequeñas cambiamos a una sola columna */
+@media (max-width: 768px) {
+    .contenido-principal {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "crear"
+            "tareas"
+            "editar";
+    }
+}
+
+/* Asignamos las áreas a nuestros paneles */
+#panel-crear {
+    grid-area: crear;
+}
+
+#panel-tareas {
+    grid-area: tareas;
+}
+
+#panel-editar {
+    grid-area: editar;
+}
+
+.panel {
+    background: #f9f9f9;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 5px var(--sombra);
+}
+
+.panel h2 {
+    color: var(--oscuro);
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--primario);
+}
+
+.grupo-formulario {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--borde);
+    border-radius: 4px;
+    font-family: inherit;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--primario);
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    background: var(--primario);
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+
+button:hover {
+    background: #2980b9;
+    transform: translateY(-2px);
+}
+
+button#boton-guardar-cambios {
+    background: var(--secundario);
+}
+
+button#boton-guardar-cambios:hover {
+    background: #27ae60;
+}
+
+button#boton-cancelar-edicion {
+    background: var(--advertencia);
+}
+
+button#boton-cancelar-edicion:hover {
+    background: #e67e22;
+}
+
+.filtros {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* 
+   ----------------------------------------------------------
+   CSS GRID PARA LAS TAREAS
+   ----------------------------------------------------------
+   Creamos un grid de tareas responsivo que se ajusta automáticamente
+   al tamaño de pantalla.
+   
+   Propiedades clave:
+   - display: grid; -> activa el modo grid
+   - grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+     Esto crea columnas que tienen un ancho mínimo de 250px y se expanden
+     para llenar el espacio disponible. Auto-fill crea tantas columnas
+     como quepan en el contenedor.
+   - gap: 15px; -> espacio entre elementos
+*/
+.contenedor-tareas {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+}
+
+.tarjeta-tarea {
+    background: white;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 5px var(--sombra);
+    border-left: 4px solid var(--borde);
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+/* Estilos de prioridad */
+.tarjeta-tarea.alta {
+    border-left-color: var(--peligro);
+    background-color: #fef6f6;
+}
+
+.tarjeta-tarea.media {
+    border-left-color: var(--advertencia);
+    background-color: #fffaf2;
+}
+
+.tarjeta-tarea.baja {
+    border-left-color: var(--secundario);
+    background-color: #f8fef6;
+}
+
+.tarjeta-tarea:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.tarjeta-tarea h3 {
+    margin-bottom: 8px;
+    color: var(--oscuro);
+}
+
+.tarjeta-tarea p {
+    color: #666;
+    margin-bottom: 15px;
+    font-size: 0.9em;
+}
+
+.etiqueta-prioridad {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+
+.etiqueta-prioridad.alta {
+    background-color: var(--peligro);
+    color: white;
+}
+
+.etiqueta-prioridad.media {
+    background-color: var(--advertencia);
+    color: white;
+}
+
+.etiqueta-prioridad.baja {
+    background-color: var(--secundario);
+    color: white;
+}
+
+.acciones-tarea {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.boton-accion {
+    padding: 5px 10px;
+    font-size: 0.85em;
+}
+
+.boton-editar {
+    background-color: var(--primario);
+}
+
+.boton-eliminar {
+    background-color: var(--peligro);
+}
+
+.panel-edicion {
+    background-color: #fffaf2;
+    border: 1px solid var(--advertencia);
+}
+
+.grupo-botones-edicion {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background: var(--oscuro);
+    color: white;
+    font-size: 0.9em;
+}
+
+.contador-tareas {
+    margin-top: 10px;
+    padding: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.prioridad-alta {
+    color: #ff9e9e;
+}
+
+.prioridad-media {
+    color: #ffd8a6;
+}
+
+.prioridad-baja {
+    color: #a6ffb3;
+}

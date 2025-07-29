@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EventosJavaScript</title>
     <link rel="stylesheet" href="index.css">
 </head>
+
 <body>
     <div class="contenedor">
         <header>
             <h1>Repaso de Eventos en JavaScript</h1>
             <p>Prueba diferentes tipos de eventos</p>
         </header>
-        
+
         <div class="contenido">
             <!-- Panel de Eventos de Ratón -->
             <div class="panel">
@@ -24,16 +26,16 @@
                     <button id="boton-raton-sobre">Mouse Over</button>
                     <button id="boton-raton-fuera">Mouse Out</button>
                 </div>
-                
+
                 <div class="area-flotante">
                     <p>Pasa el ratón sobre este área para probar eventos de mouseover/mouseout</p>
                 </div>
-                
+
                 <div class="salida" id="salida-raton">
                     Esperando eventos de ratón...
                 </div>
             </div>
-            
+
             <!-- Panel de Eventos de Teclado -->
             <div class="panel">
                 <h2>Eventos de Teclado</h2>
@@ -41,16 +43,16 @@
                     <label for="entrada-teclado">Prueba eventos de teclado:</label>
                     <input type="text" id="entrada-teclado" placeholder="Escribe aquí...">
                 </div>
-                
+
                 <div class="caja-teclado" id="caja-teclado">
                     Presiona cualquier tecla
                 </div>
-                
+
                 <div class="salida" id="salida-teclado">
                     Esperando eventos de teclado...
                 </div>
             </div>
-            
+
             <!-- Panel de Eventos de Formulario -->
             <div class="panel">
                 <h2>Eventos de Formulario</h2>
@@ -59,12 +61,12 @@
                         <label for="nombre">Nombre:</label>
                         <input type="text" id="nombre" name="nombre" required>
                     </div>
-                    
+
                     <div class="grupo-formulario">
                         <label for="email">Email:</label>
                         <input type="email" id="email" name="email" required>
                     </div>
-                    
+
                     <div class="grupo-formulario">
                         <label for="pais">País:</label>
                         <select id="pais" name="pais">
@@ -75,30 +77,30 @@
                             <option value="co">Colombia</option>
                         </select>
                     </div>
-                    
+
                     <div class="grupo-formulario">
                         <label for="mensaje">Mensaje:</label>
                         <textarea id="mensaje" name="mensaje" rows="3"></textarea>
                     </div>
-                    
+
                     <div class="grupo-formulario">
                         <label>
-                            <input type="checkbox" id="suscripcion" name="suscripcion"> 
+                            <input type="checkbox" id="suscripcion" name="suscripcion">
                             Suscribirse al newsletter
                         </label>
                     </div>
-                    
+
                     <div class="grupo-formulario">
                         <button type="submit" id="boton-enviar">Enviar Formulario</button>
                         <button type="reset" id="boton-limpiar">Limpiar</button>
                     </div>
                 </form>
-                
+
                 <div class="salida" id="salida-formulario">
                     Eventos de formulario aparecerán aquí...
                 </div>
             </div>
-            
+
             <!-- Panel de Otros Eventos -->
             <div class="panel">
                 <h2>Otros Eventos</h2>
@@ -107,20 +109,41 @@
                     <button id="boton-redimensionar">Simular Redimensión</button>
                     <button id="boton-desplazar">Desplázate en la página</button>
                 </div>
-                
+
                 <div class="salida" id="salida-otros">
                     <p>Estado de carga: <span id="estado-carga">No cargado</span></p>
                     <p>Tamaño de ventana: <span id="tamano-ventana">Calculando...</span></p>
                     <p>Posición de desplazamiento: <span id="posicion-desplazamiento">0px</span></p>
                 </div>
-                
+
                 <div class="area-desplazable" id="area-desplazable">
                     <p>Este es un área desplazable. Prueba el evento scroll.</p>
                     <div class="contenido-desplazable"></div>
                 </div>
             </div>
         </div>
-        
+        <!-- Nuevos elementos para la API -->
+        <div class="seccion-api">
+            <h2>API de Rick and Morty</h2>
+            <button id="boton-cargar-personajes">Cargar Personajes</button>
+            <p id="estado-api-carga">Esperando acción...</p>
+
+            <!-- Contenedor grid para personajes -->
+            <div id="personajes-container" class="personajes-grid"></div>
+                <!-- Contenedor grid para personajes -->
+                <div id="personajes-container" class="personajes-grid"></div>
+
+                <!-- Nuevos controles para localStorage -->
+                <div class="storage-controls">
+                    <button id="boton-ver-localstorage">Ver Datos en LocalStorage</button>
+                    <button id="boton-limpiar-localstorage">Limpiar Todo LocalStorage</button>
+                </div>
+
+                <!-- Área para mostrar datos de localStorage -->
+                <div id="localstorage-data" class="localstorage-data"></div>
+            </div>
+        </div>
+
         <footer>
             <p>Repaso de conceptos de JavaScript - Eventos DOM</p>
         </footer>
@@ -128,4 +151,5 @@
 
     <script src="index.js"></script>
 </body>
+
 </html>

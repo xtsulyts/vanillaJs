@@ -287,3 +287,268 @@ registrarEvento(salidaRaton, 'Sistema listo. Prueba los eventos de ratón.');
 registrarEvento(salidaTeclado, 'Sistema listo. Escribe en el campo de texto.');
 registrarEvento(salidaFormulario, 'Sistema listo. Interactúa con el formulario.');
 registrarEvento(salidaOtros, 'Sistema listo. Prueba los otros eventos.');
+
+
+/* 
+ * -----------------------------------------------------------
+ * 8. INTEGRACIÓN CON RICK AND MORTY API
+ * -----------------------------------------------------------
+ * 
+ * Nuevo módulo para manejar la API con persistencia en localStorage
+ * y gestión de eventos personalizados.
+ */
+
+// Referencias a nuevos elementos del DOM
+const botonCargarPersonajes = document.getElementById('boton-cargar-personajes');
+const personajesContainer = document.getElementById('personajes-container');
+const estadoAPICarga = document.getElementById('estado-api-carga');
+
+/**
+ * Clave para almacenamiento local
+ * @const {string}
+ */
+const PERSONAJES_STORAGE_KEY = 'rickAndMortyCharacters';
+
+/**
+ * Obtiene personajes desde API o localStorage
+ * @async
+ * @returns {Promise<Array>} Lista de personajes
+ */
+async function obtenerPersonajes() {
+  // 1. Verificar si existen datos en localStorage
+  const datosGuardados = localStorage.getItem(PERSONAJES_STORAGE_KEY);
+  
+  if (datosGuardados) {
+    registrarEvento(salidaOtros, 'Datos cargados desde localStorage');
+    return JSON.parse(datosGuardados);
+  }
+
+  // 2. Si no hay datos locales, hacer fetch a la API
+  try {
+    estadoAPICarga.textContent = 'Cargando...';
+    estadoAPICarga.style.color = '#f39c12';
+    
+    const respuesta = await fetch('https://rickandmortyapi.com/api/character');
+    
+    if (!respuesta.ok) throw new Error(`Error HTTP: ${respuesta.status}`);
+    
+    const datos = await respuesta.json();
+    const personajes = datos.results.slice(0, 6); // Limitar a 6 personajes
+    
+    // 3. Guardar en localStorage con fecha de expiración (1 hora)
+    const datosConTimestamp = {
+      personajes,
+      timestamp: Date.now()
+    };
+    localStorage.setItem(PERSONAJES_STORAGE_KEY, JSON.stringify(datosConTimestamp));
+    
+    registrarEvento(salidaOtros, 'Datos obtenidos desde API y guardados');
+    return personajes;
+    
+  } catch (error) {
+    registrarEvento(salidaOtros, `Error en API: ${error.message}`);
+    estadoAPICarga.textContent = 'Error en carga';
+    estadoAPICarga.style.color = '#e74c3c';
+    return [];
+  }
+}
+
+/**
+ * Renderiza personajes en el DOM usando Grid CSS
+ * @param {Array} personajes - Lista de personajes a mostrar
+ */
+function mostrarPersonajes(personajes) {
+  // Limpiar contenedor
+  personajesContainer.innerHTML = '';
+  
+  // Crear estructura de grid
+  personajes.forEach(personaje => {
+    const card = document.createElement('div');
+    card.className = 'personaje-card';
+    
+    card.innerHTML = `
+      <img src="${personaje.image}" alt="${personaje.name}">
+      <h3>${personaje.name}</h3>
+      <p>Especie: ${personaje.species}</p>
+      <p>Estado: ${personaje.status}</p>
+    `;
+    
+    // Evento personalizado al hacer clic en tarjeta
+    card.addEventListener('click', () => {
+      registrarEvento(
+        salidaOtros, 
+        `Personaje seleccionado: ${personaje.name}`
+      );
+      card.classList.toggle('seleccionado');
+    });
+    
+    personajesContainer.appendChild(card);
+  });
+  
+  estadoAPICarga.textContent = 'Cargado!';
+  estadoAPICarga.style.color = '#2ecc71';
+}
+
+/**
+ * Verifica si los datos almacenados están desactualizados
+ * @param {number} timestamp - Fecha de creación de los datos
+ * @returns {boolean} True si los datos son mayores a 1 hora
+ */
+function datosExpirados(timestamp) {
+  const UNA_HORA = 60 * 60 * 1000; // milisegundos
+  return (Date.now() - timestamp) > UNA_HORA;
+}
+
+// Evento para cargar personajes
+botonCargarPersonajes.addEventListener('click', async () => {
+  registrarEvento(salidaOtros, 'Solicitando personajes...');
+  
+  // Verificar datos existentes
+  const datosRaw = localStorage.getItem(PERSONAJES_STORAGE_KEY);
+  
+  if (datosRaw) {
+    const datos = JSON.parse(datosRaw);
+    
+    if (datosExpirados(datos.timestamp)) {
+      localStorage.removeItem(PERSONAJES_STORAGE_KEY);
+      registrarEvento(salidaOtros, 'Datos expirados, limpiando cache');
+    }
+  }
+  
+  const personajes = await obtenerPersonajes();
+  mostrarPersonajes(personajes);
+});
+
+/* 
+ * -----------------------------------------------------------
+ * 9. INICIALIZACIÓN DE PERSONAJES
+ * -----------------------------------------------------------
+ * 
+ * Cargar personajes automáticamente si existen en localStorage
+ */
+document.addEventListener('DOMContentLoaded', async () => {
+  const datosRaw = localStorage.getItem(PERSONAJES_STORAGE_KEY);
+  
+  if (datosRaw) {
+    const datos = JSON.parse(datosRaw);
+    
+    if (!datosExpirados(datos.timestamp)) {
+      mostrarPersonajes(datos.personajes);
+      registrarEvento(salidaOtros, 'Personajes cargados al iniciar');
+    }
+  }
+});
+
+/* 
+ * -----------------------------------------------------------
+ * 10. GESTIÓN AVANZADA DE LOCALSTORAGE
+ * -----------------------------------------------------------
+ * 
+ * Nuevas funciones para visualizar y eliminar datos almacenados
+ */
+
+// Referencias a nuevos elementos
+const botonVerLocalStorage = document.getElementById('boton-ver-localstorage');
+const botonLimpiarLocalStorage = document.getElementById('boton-limpiar-localstorage');
+const localStorageData = document.getElementById('localstorage-data');
+
+/**
+ * Muestra los datos de localStorage en una tabla
+ * @param {Object} datos - Datos a mostrar
+ */
+function mostrarDatosLocalStorage(datos) {
+  // Crear tabla con estilos
+  let html = `
+    <table class="storage-table">
+      <thead>
+        <tr>
+          <th>Clave</th>
+          <th>Valor</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+  `;
+  
+  // Recorrer todas las claves de localStorage
+  Object.keys(datos).forEach(clave => {
+    try {
+      // Intentar parsear si es JSON
+      const valor = JSON.parse(datos[clave]);
+      html += `
+        <tr>
+          <td>${clave}</td>
+          <td><pre>${JSON.stringify(valor, null, 2)}</pre></td>
+          <td>
+            <button class="btn-eliminar" data-clave="${clave}">Eliminar</button>
+          </td>
+        </tr>
+      `;
+    } catch {
+      // Mostrar como texto plano si no es JSON
+      html += `
+        <tr>
+          <td>${clave}</td>
+          <td>${datos[clave]}</td>
+          <td>
+            <button class="btn-eliminar" data-clave="${clave}">Eliminar</button>
+          </td>
+        </tr>
+      `;
+    }
+  });
+  
+  html += `</tbody></table>`;
+  
+  localStorageData.innerHTML = html;
+  
+  // Agregar eventos a los botones de eliminación
+  document.querySelectorAll('.btn-eliminar').forEach(boton => {
+    boton.addEventListener('click', (e) => {
+      const clave = e.target.dataset.clave;
+      localStorage.removeItem(clave);
+      registrarEvento(salidaOtros, `Elemento eliminado: ${clave}`);
+      actualizarVistaLocalStorage();
+    });
+  });
+}
+
+/**
+ * Actualiza la vista de localStorage
+ */
+function actualizarVistaLocalStorage() {
+  // Obtener todos los datos de localStorage
+  const datos = { ...localStorage };
+  
+  if (Object.keys(datos).length === 0) {
+    localStorageData.innerHTML = '<p class="storage-vacio">No hay datos en localStorage</p>';
+  } else {
+    mostrarDatosLocalStorage(datos);
+  }
+}
+
+/**
+ * Limpia todo el localStorage
+ */
+function limpiarLocalStorage() {
+  localStorage.clear();
+  registrarEvento(salidaOtros, 'LocalStorage limpiado completamente');
+  actualizarVistaLocalStorage();
+  
+  // Actualizar estado de personajes
+  personajesContainer.innerHTML = '';
+  estadoAPICarga.textContent = 'Datos limpiados';
+  estadoAPICarga.style.color = '#3498db';
+}
+
+// Evento para ver localStorage
+botonVerLocalStorage.addEventListener('click', () => {
+  registrarEvento(salidaOtros, 'Mostrando datos de localStorage');
+  actualizarVistaLocalStorage();
+});
+
+// Evento para limpiar localStorage
+botonLimpiarLocalStorage.addEventListener('click', limpiarLocalStorage);
+
+// Actualizar vista al cargar la página
+document.addEventListener('DOMContentLoaded', actualizarVistaLocalStorage);
