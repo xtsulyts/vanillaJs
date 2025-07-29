@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subida de Archivos - Práctica JS</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <!-- Contenedor principal usando CSS Grid -->
+    <div class="grid-container">
+        <header class="header">
+            <h1>Subida de Archivos</h1>
+        </header>
+
+        <main class="main-content">
+            <div class="upload-area" id="dropZone">
+                <!-- Área para arrastrar/soltar archivos -->
+                <input type="file" id="fileInput">
+                <p>Arrastra tu archivo aquí o haz clic</p>
+            </div>
+            
+            <div class="file-info" id="fileInfo">
+                <!-- Información del archivo seleccionado -->
+                <p>🗃️ Ningún archivo seleccionado</p>
+            </div>
+
+            <button id="uploadBtn">Subir Archivo</button>
+            <div class="image-preview" id="imagePreview">
+    <h3>Vista Previa:</h3>
+    <img id="previewImg" alt="Previsualización de imagen">
+</div>
+
+        </main>
+
+        <section class="response-area">
+            <!-- Respuesta de la subida -->
+            <h2>Respuesta del servidor:</h2>
+            <pre id="serverResponse">Esperando acción...</pre>
+        </section>
+        <!-- Agregar después de .response-area -->
+<section class="gallery">
+    <h2>Galería de Imágenes Guardadas</h2>
+    <div id="imageGallery" class="gallery-grid">
+        <!-- Las imágenes se cargarán aquí -->
+    </div>
+</section>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>

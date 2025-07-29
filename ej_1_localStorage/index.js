@@ -77,7 +77,6 @@ formTarea.addEventListener("submit", function (e) {
     actualizarTarea(tareaActualizada, idEdicion); // Actualiza la tarea
     editando = false; // Desactiva modo edición
     idEdicion = null; // Resetea ID de edición
-    
     // Cambia el texto del botón a "Agregar tarea"
     document.querySelector('button[type="submit"]').textContent = "Agregar tarea";
   } else {

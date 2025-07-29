@@ -1,0 +1,64 @@
+/* Estructura principal con CSS Grid */
+.grid-container {
+    display: grid;
+    /* 
+        Grid de 3 áreas:
+        header
+        contenido principal
+        área de respuesta 
+    */
+    grid-template-areas:
+        "header"
+        "main"
+        "response";
+    gap: 20px;
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+}
+
+/* Asignación de áreas */
+.header { grid-area: header; }
+.main-content { grid-area: main; }
+.response-area { grid-area: response; }
+
+/* Estilos del área de subida */
+.upload-area {
+    border: 2px dashed #ccc;
+    padding: 40px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.upload-area:hover {
+    background-color: #f9f9f9;
+}
+
+.file-info {
+    margin: 15px 0;
+    padding: 10px;
+    background: #f0f0f0;
+    border-radius: 4px;
+}
+
+button {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+}
+
+/* Estilos para el área de respuesta */
+#serverResponse {
+    background: #1e1e1e;
+    color: #d4d4d4;
+    padding: 15px;
+    border-radius: 4px;
+    overflow-x: auto;
+    min-height: 100px;
+}
