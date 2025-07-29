@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArchivosFetchAPI</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+    <div class="contenedor-principal">
+        <header class="cabecera">
+            <h1>Subida de Archivos</h1>
+            <p>Práctica de JavaScript: localStorage, DOM y Fetch</p>
+        </header>
+        
+        <main class="contenido-principal">
+            <div class="seccion-subida">
+                <!-- Área de subida de archivos -->
+                <div class="area-subida" id="zonaArrastre">
+                    <input type="file" id="entradaArchivo" accept="image/*,.pdf" style="display: none;">
+                    <div class="icono-archivo">📁</div>
+                    <h3>Arrastra y suelta tu archivo aquí</h3>
+                    <p>o haz clic para seleccionar un archivo</p>
+                    <p><small>Formatos permitidos: imágenes (JPG, PNG, GIF) y PDF</small></p>
+                </div>
+                
+                <!-- Vista previa del archivo -->
+                <div class="previsualizacion">
+                    <h3>Vista Previa</h3>
+                    <img id="imagenPrevia" alt="Previsualización de archivo">
+                    <div id="infoArchivo" class="info-archivo">
+                        <p>Ningún archivo seleccionado</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Mensaje de estado -->
+            <div id="mensajeEstado" class="mensaje-estado"></div>
+            
+            <!-- Botón de subir archivo -->
+            <button id="botonSubir" class="boton-subir" disabled>Subir Archivo</button>
+            
+            <!-- Respuesta del servidor -->
+            <div class="respuesta-servidor">
+                <h3>Respuesta del Servidor:</h3>
+                <pre id="respuestaServidor">Esperando acción...</pre>
+            </div>
+        </main>
+        
+        <!-- Galería de archivos -->
+        <section class="galeria">
+            <h2>Archivos Guardados</h2>
+            <div id="galeriaImagenes" class="contenedor-galeria">
+                <!-- Los archivos se cargarán aquí dinámicamente -->
+            </div>
+        </section>
+        
+        <!-- Pie de página -->
+        <footer class="pie-pagina">
+            <p>Práctica de JavaScript - LocalStorage, DOM Manipulation & Fetch API</p>
+            <p>Los archivos se almacenan localmente usando IndexedDB</p>
+        </footer>
+    </div>
+
+
+</body>
+<script src="index.js"></script>
+</html>
