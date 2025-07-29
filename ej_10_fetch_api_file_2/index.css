@@ -1,0 +1,215 @@
+    /* ============================================== */
+/* Estructura principal con CSS Grid               */
+/* ============================================== */
+
+/* Contenedor principal - Grid de 3 áreas */
+.grid-container {
+    display: grid;
+    grid-template-areas:
+        "header"
+        "main"
+        "gallery"
+        "footer";
+    gap: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f7fa;
+    min-height: 100vh;
+}
+
+/* Asignación de áreas */
+.header {
+    grid-area: header;
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.main-content {
+    grid-area: main;
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.gallery {
+    grid-area: gallery;
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.footer {
+    grid-area: footer;
+    text-align: center;
+    padding: 15px;
+    color: #666;
+    font-size: 0.9em;
+}
+
+/* ============================================== */
+/* Grid para el área de subida                    */
+/* ============================================== */
+.upload-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+@media (max-width: 768px) {
+    .upload-section {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ============================================== */
+/* Grid para la galería de imágenes               */
+/* ============================================== */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+/* ============================================== */
+/* Estilos generales                              */
+/* ============================================== */
+.upload-area {
+    border: 2px dashed #6a11cb;
+    border-radius: 10px;
+    padding: 30px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    background-color: #f8f9fe;
+}
+
+.upload-area:hover {
+    background-color: #eef2ff;
+    transform: translateY(-2px);
+}
+
+.file-info {
+    margin: 15px 0;
+    padding: 15px;
+    background: #f0f5ff;
+    border-radius: 8px;
+    font-size: 0.9em;
+}
+
+.preview-container {
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    background: #f8f9fe;
+}
+
+.preview-img {
+    max-width: 100%;
+    max-height: 250px;
+    border-radius: 5px;
+    display: none; /* Oculto inicialmente */
+}
+
+button {
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: all 0.3s;
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(106, 17, 203, 0.3);
+}
+
+button:disabled {
+    background: #cccccc;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.gallery-item {
+    border: 1px solid #e0e0e0;
+    padding: 10px;
+    text-align: center;
+    border-radius: 8px;
+    background: white;
+    transition: all 0.3s;
+    overflow: hidden;
+}
+
+.gallery-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.gallery-item p {
+    margin: 8px 0;
+    font-size: 0.85em;
+    color: #555;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.server-response pre {
+    word-break: break-all;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    margin: 0;
+    font-family: inherit;
+    background: black;
+    color:white;
+}
+h2 {
+    color: #2c3e50;
+    border-bottom: 2px solid #6a11cb;
+    padding-bottom: 10px;
+    margin-top: 0;
+}
+
+.status-message {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
